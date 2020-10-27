@@ -22,7 +22,7 @@ from gevent.pywsgi import WSGIServer
 app = Flask(__name__)
 
 # Model saved with Keras model.save()
-MODEL_PATH = '/home/dit/DiT/GitHub/Pylingo/Jupyters/DS/Keras/tomatoes_disease_classification/web_demo/tomato_inception_v3.h5'
+MODEL_PATH = '/home/dit/DiT/GitHub/Pylingo/Jupyters/DS/Keras/saved_model/tomato_inception_v3.h5'
 
 # Load your trained model
 model = load_model(MODEL_PATH, custom_objects=None, compile=True)
