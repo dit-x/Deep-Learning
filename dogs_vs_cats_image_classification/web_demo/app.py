@@ -67,7 +67,7 @@ def upload():
             basepath, 'uploads', secure_filename(f.filename))
 
         # SAVE THE PICTURE
-        # f.save(file_path)
+        f.save(file_path)
 
         # Make prediction
         pred = model_predict(file_path, model)
