@@ -1,5 +1,7 @@
 {% extends "base.html" %} {% block content %}
 
+
+
 <h1>Plant Diseases Classifier</h1>
 
 <div class="container">
@@ -11,19 +13,15 @@
     </p>
 </div>
 
-<div class='container'>
+<div class='btn-group-vertical'>
     <h3>Here are the Plants</h3>
     <p>Click the plant name and it will take you to the testing page</p>
-    <h4>
-        <ul>
-            <li><a href="/tomato">Tomato</a></li>
-            <li><a href="/tomato">Potato</a></li>
-            <li><a href="/tomato">Pepper</a></li>
-            <li><a href="/tomato">Maize</a></li>
-        </ul>
-    <h4/>
+    <ul>
+        <button class="btn btn-outline-info my-2 my-sm-0" onclick="window.location='/tomato'">Tomato</button>
+        <button class="btn btn-outline-info my-2 my-sm-0" onclick="window.location='/pepper'">Pepper</button>
+        <button class="btn btn-outline-info my-2 my-sm-0" onclick="window.location='/potato'">Potato</button>
+    </ul>
       
-    <a href="https://www.w3schools.com/">Visit W3Schools.com!</a>
 </div>
 
 

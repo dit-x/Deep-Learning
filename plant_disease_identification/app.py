@@ -73,6 +73,11 @@ def home():
 def tomato():
     return render_template('tomato.html')
 
+@app.route('/pepper', methods=['GET'])
+def pepper():
+    return render_template('pepper.html')
+
+
 
 @app.route('/predict', methods=['GET', 'POST'])
 def upload():
