@@ -14,18 +14,15 @@ from keras.applications.imagenet_utils import preprocess_input, decode_predictio
 from keras.models import load_model
 
 # Flask utils
-from flask import Flask, redirect, url_for, request, render_template
+from flask import Flask, redirect, url_for, request, render_template, flash, session
 from werkzeug.utils import secure_filename
 from gevent.pywsgi import WSGIServer
 
 # Define a flask app
 app = Flask(__name__)
 
-# Model saved with Keras model.save()
-MODEL_PATH = '/home/dit/DiT/GitHub/Pylingo/Jupyters/DS/Keras/saved_model/plant/tomato_inception_v3.h5'
 
-# Load your trained model
-model = load_model(MODEL_PATH, custom_objects=None, compile=True)
+
 
 #%%
 # You can also use pretrained model from Keras
@@ -69,18 +66,30 @@ def home():
     return render_template('home.html')
 
     
-@app.route('/tomato', methods=['GET'])
+@app.route('/tomato', methods=['GET', 'POST'])
 def tomato():
+    session['path'] = '/home/dit/DiT/GitHub/Pylingo/Jupyters/DS/Keras/saved_model/plant/tomato_inception_v3.h5'
+    
     return render_template('tomato.html')
+
 
 @app.route('/pepper', methods=['GET'])
 def pepper():
+    session['path'] = '/home/dit/DiT/GitHub/Pylingo/Jupyters/DS/Keras/saved_model/plant/pepper_inception_v3.h5'
     return render_template('pepper.html')
+
+
+@app.route('/potato', methods=['GET'])
+def potato():
+    session['path'] = '/home/dit/DiT/GitHub/Pylingo/Jupyters/DS/Keras/saved_model/plant/potato_inception_v3.h5'
+    return render_template('potato.html')
 
 
 
 @app.route('/predict', methods=['GET', 'POST'])
 def upload():
+    MODEL_PATH = session.get('path')
+    model = load_model(MODEL_PATH, custom_objects=None, compile=True)
     if request.method == 'POST':
         # Get the file from post request
         f = request.files['file']
@@ -96,14 +105,11 @@ def upload():
         return r
 
 
-        # # Process your result for human
-        # # pred_class = preds.argmax(axis=-1)            # Simple argmax
-        # # pred_class = decode_predictions(preds, top=1)   # ImageNet Decode
-        # result = str(pred[0][0])               # Convert to string
-        # return pred
     return None
 
 
+
 if __name__ == '__main__':
+    app.secret_key = 'super secret key'
     app.run(debug=True)
 
