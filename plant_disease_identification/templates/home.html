@@ -1,0 +1,30 @@
+{% extends "base.html" %} {% block content %}
+
+<h1>Plant Diseases Classifier</h1>
+
+<div class="container">
+    
+    <h2>Page Description</h2>
+    <p>
+        There are 6 different plants that are trained based on the available datasets. The model are
+        train seperately to minimize comfusion and to identify the disease specific to a plant
+    </p>
+</div>
+
+<div class='container'>
+    <h3>Here are the Plants</h3>
+    <p>Click the plant name and it will take you to the testing page</p>
+    <h4>
+        <ul>
+            <li><a href="/tomato">Tomato</a></li>
+            <li><a href="/tomato">Potato</a></li>
+            <li><a href="/tomato">Pepper</a></li>
+            <li><a href="/tomato">Maize</a></li>
+        </ul>
+    <h4/>
+      
+    <a href="https://www.w3schools.com/">Visit W3Schools.com!</a>
+</div>
+
+
+{% endblock %}

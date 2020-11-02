@@ -61,10 +61,17 @@ def model_predict(img_path, model):
         return (f'Infected with {labels[what_class[0]].upper()} with confident scale of {scale}')
 
 
+
+
 @app.route('/', methods=['GET'])
-def index():
-    # Main page
-    return render_template('index.html')
+@app.route('/home', methods=['GET'])
+def home():
+    return render_template('home.html')
+
+    
+@app.route('/tomato', methods=['GET'])
+def tomato():
+    return render_template('tomato.html')
 
 
 @app.route('/predict', methods=['GET', 'POST'])
