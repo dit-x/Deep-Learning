@@ -65,10 +65,10 @@ def model_predict(img_path, model, plant):
 
     result_label = labels[what_class[0]]
     if result_label.lower() == 'healthy':
-        return (f'Tomato is classified HEALTHY with scale of {result.max()}')
+        return (f'{plant.title()} leaf is classified HEALTHY with scale of {scale}')
 
     else:
-        return (f'Infected with {result_label.upper()} with confident scale of {scale}')
+        return (f'{plant.title()} leaf is infected with {result_label.upper()} with confident scale of {scale}')
 
 
 
