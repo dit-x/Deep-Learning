@@ -31,13 +31,21 @@ app = Flask(__name__)
 print('Model loaded. Check http://127.0.0.1:5000/')
 
 
-def model_predict(img_path, model):
+def model_predict(img_path, model, plant):
     from keras.preprocessing import image
 
     IMAGE_SIZE = [224, 224]
-    labels = ['Bacterial_spot','Early_blight','Late_blight','Leaf_Mold','Septoria_leaf_spot',
-              'Spider_mites Two-spotted_spider_mite','Target_Spot','Tomato_Yellow_Leaf_Curl_Virus',
-              'Tomato_mosaic_virus','healthy']
+
+    if plant == 'tomato':
+        labels = ['Bacterial_spot','Early_blight','Late_blight','Leaf_Mold','Septoria_leaf_spot',
+                'Spider_mites Two-spotted_spider_mite','Target_Spot','Tomato_Yellow_Leaf_Curl_Virus',
+                'Tomato_mosaic_virus','healthy']
+    
+    if plant == 'potato':
+        labels = ['Early_blight', 'Late_blight', 'healthy']
+
+    if plant == 'pepper':
+        labels = ['Bacterial_spot', 'Healthy']
 
     img = image.load_img(img_path, target_size=IMAGE_SIZE)
 
@@ -48,14 +56,19 @@ def model_predict(img_path, model):
     x = np.expand_dims(x, axis=0)
 
     result = model.predict(x)
+    os.remove(img_path)
+    print('deleted ', img_path)
+    print()
 
     what_class = np.argmax(result, axis=-1)
     scale = '{:.2f}'.format(round(result.max(), 2))
-    if what_class == 9:
+
+    result_label = labels[what_class[0]]
+    if result_label.lower() == 'healthy':
         return (f'Tomato is classified HEALTHY with scale of {result.max()}')
 
     else:
-        return (f'Infected with {labels[what_class[0]].upper()} with confident scale of {scale}')
+        return (f'Infected with {result_label.upper()} with confident scale of {scale}')
 
 
 
@@ -68,19 +81,21 @@ def home():
     
 @app.route('/tomato', methods=['GET', 'POST'])
 def tomato():
+    session['plant'] = 'tomato'
     session['path'] = '/home/dit/DiT/GitHub/Pylingo/Jupyters/DS/Keras/saved_model/plant/tomato_inception_v3.h5'
-    
     return render_template('tomato.html')
 
 
 @app.route('/pepper', methods=['GET'])
 def pepper():
+    session['plant'] = 'pepper'
     session['path'] = '/home/dit/DiT/GitHub/Pylingo/Jupyters/DS/Keras/saved_model/plant/pepper_inception_v3.h5'
     return render_template('pepper.html')
 
 
 @app.route('/potato', methods=['GET'])
 def potato():
+    session['plant'] = 'potato'
     session['path'] = '/home/dit/DiT/GitHub/Pylingo/Jupyters/DS/Keras/saved_model/plant/potato_inception_v3.h5'
     return render_template('potato.html')
 
@@ -88,8 +103,13 @@ def potato():
 
 @app.route('/predict', methods=['GET', 'POST'])
 def upload():
+    plant_name = session.get('plant')
     MODEL_PATH = session.get('path')
     model = load_model(MODEL_PATH, custom_objects=None, compile=True)
+
+    print('\n')
+    print(MODEL_PATH)
+    print('\n')
     if request.method == 'POST':
         # Get the file from post request
         f = request.files['file']
@@ -101,7 +121,7 @@ def upload():
         f.save(file_path)
 
         # Make prediction
-        r = model_predict(file_path, model)
+        r = model_predict(file_path, model, plant_name)
         return r
 
 
