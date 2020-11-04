@@ -10,4 +10,4 @@ For the web demo to work, you can download
 Once the trained model has been downloaded, change the model location in the `app.py` file
 
 # Web Demo `app.py`
-The flask app interface is written to test tomato plant diseases, it can be editted to test for the other plants by changing the trained model `.h5` file and the interface
+The flask app interface is written to test the plant diseases classifier model. To used the flask app test, change the model file location and the downloading and make sure it is specific to the plant name in `app.py`.
