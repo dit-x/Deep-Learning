@@ -47,6 +47,10 @@ def model_predict(img_path, model, plant):
     if plant == 'pepper':
         labels = ['Bacterial_spot', 'Healthy']
 
+    if plant == 'maize':
+        labels = ['Cercospora_leaf_spot Gray_leaf_spot', 'Common_rust', 'Northern_Leaf_Blight', 'healthy']
+
+
     img = image.load_img(img_path, target_size=IMAGE_SIZE)
 
     # Preprocessing the image
@@ -99,6 +103,11 @@ def potato():
     session['path'] = '/home/dit/DiT/GitHub/Pylingo/Jupyters/DS/Keras/saved_model/plant/potato_inception_v3.h5'
     return render_template('potato.html')
 
+@app.route('/maize', methods=['GET'])
+def maize():
+    session['plant'] = 'maize'
+    session['path'] = '/home/dit/DiT/GitHub/Pylingo/Jupyters/DS/Keras/saved_model/plant/maize_inception_v3.h5'
+    return render_template('maize.html')
 
 
 @app.route('/predict', methods=['GET', 'POST'])
