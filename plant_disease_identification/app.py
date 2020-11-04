@@ -130,8 +130,8 @@ def upload():
         f.save(file_path)
 
         # Make prediction
-        r = model_predict(file_path, model, plant_name)
-        return r
+        result = model_predict(file_path, model, plant_name)
+        return result
 
 
     return None
