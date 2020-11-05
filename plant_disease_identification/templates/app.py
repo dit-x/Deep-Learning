@@ -51,10 +51,6 @@ def model_predict(img_path, model, plant):
         labels = ['Cercospora_leaf_spot Gray_leaf_spot', 'Common_rust', 'Northern_Leaf_Blight', 'healthy']
 
 
-    if plant == 'cassava':
-        labels =  ['cbb', 'cbsd', 'cgm', 'cmd', 'healthy']
-
-
     img = image.load_img(img_path, target_size=IMAGE_SIZE)
 
     # Preprocessing the image
@@ -114,7 +110,7 @@ def maize():
     return render_template('maize.html')
 
 @app.route('/cassava', methods=['GET'])
-def cassava():
+def maize():
     session['plant'] = 'cassava'
     session['path'] = 'plant_models/cassava_inception_v3.h5'
     return render_template('cassava.html')
