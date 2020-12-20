@@ -80,7 +80,6 @@ def model_predict(img_path, model, plant):
 
 
 
-
 @app.route('/', methods=['GET'])
 @app.route('/home', methods=['GET'])
 def home():
@@ -90,27 +89,27 @@ def home():
 @app.route('/tomato', methods=['GET', 'POST'])
 def tomato():
     session['plant'] = 'tomato'
-    session['path'] = '/home/dit/DiT/GitHub/Pylingo/Jupyters/DS/Keras/saved_model/plant/tomato_inception_v3.h5'
+    session['path'] = 'plant_models/tomato_inception_v3.h5'
     return render_template('tomato.html')
 
 
 @app.route('/pepper', methods=['GET'])
 def pepper():
     session['plant'] = 'pepper'
-    session['path'] = '/home/dit/DiT/GitHub/Pylingo/Jupyters/DS/Keras/saved_model/plant/pepper_inception_v3.h5'
+    session['path'] = 'plant_models/pepper_inception_v3.h5'
     return render_template('pepper.html')
 
 
 @app.route('/potato', methods=['GET'])
 def potato():
     session['plant'] = 'potato'
-    session['path'] = '/home/dit/DiT/GitHub/Pylingo/Jupyters/DS/Keras/saved_model/plant/potato_inception_v3.h5'
+    session['path'] = 'plant_models/potato_inception_v3.h5'
     return render_template('potato.html')
 
 @app.route('/maize', methods=['GET'])
 def maize():
     session['plant'] = 'maize'
-    session['path'] = '/home/dit/DiT/GitHub/Pylingo/Jupyters/DS/Keras/saved_model/plant/maize_inception_v3.h5'
+    session['path'] = 'plant_models/maize_inception_v3.h5'
     return render_template('maize.html')
 
 @app.route('/cassava', methods=['GET'])
