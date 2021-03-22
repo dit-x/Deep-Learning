@@ -21,7 +21,7 @@ from gevent.pywsgi import WSGIServer
 # Define a flask app
 app = Flask(__name__)
 
-
+model_location = 'C:\Users\DiT\GitHub\plant_models'
 
 
 #%%
@@ -89,33 +89,33 @@ def home():
 @app.route('/tomato', methods=['GET', 'POST'])
 def tomato():
     session['plant'] = 'tomato'
-    session['path'] = 'plant_models/tomato_inception_v3.h5'
+    session['path'] = os.path.join(model_location, 'tomato_inception_v3.h5')
     return render_template('tomato.html')
 
 
 @app.route('/pepper', methods=['GET'])
 def pepper():
     session['plant'] = 'pepper'
-    session['path'] = 'plant_models/pepper_inception_v3.h5'
+    session['path'] = os.path.join(model_location, 'pepper_inception_v3.h5')
     return render_template('pepper.html')
 
 
 @app.route('/potato', methods=['GET'])
 def potato():
     session['plant'] = 'potato'
-    session['path'] = 'plant_models/potato_inception_v3.h5'
+    session['path'] = os.path.join(model_location, 'potato_inception_v3.h5')
     return render_template('potato.html')
 
 @app.route('/maize', methods=['GET'])
 def maize():
     session['plant'] = 'maize'
-    session['path'] = 'plant_models/maize_inception_v3.h5'
+    session['path'] = os.path.join(model_location, 'maize_inception_v3.h5')
     return render_template('maize.html')
 
 @app.route('/cassava', methods=['GET'])
 def cassava():
     session['plant'] = 'cassava'
-    session['path'] = 'plant_models/cassava_inception_v3.h5'
+    session['path'] = os.path.join(model_location, 'cassava_inception_v3.h5')
     return render_template('cassava.html')
 
 
