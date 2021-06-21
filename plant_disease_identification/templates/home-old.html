@@ -1,0 +1,28 @@
+{% extends "base.html" %} {% block content %}
+
+
+
+<h1>Plant Diseases Classifier Description</h1>
+
+<div class="container">
+    <p>
+        There are 3 different plants that are trained based on the available datasets, more will be added. The model are
+        train seperately to minimize comfusion and to identify the disease specific to a plant
+    </p>
+</div>
+
+<div class='btn-group-vertical'>
+    <h3>Here are the Plants</h3>
+    <p>Click the plant name and it will take you to the testing page</p>
+    <ul>
+        <button class="btn btn-outline-info my-2 my-sm-0" onclick="window.location='/tomato'">Tomato</button>
+        <button class="btn btn-outline-info my-2 my-sm-0" onclick="window.location='/pepper'">Pepper</button>
+        <button class="btn btn-outline-info my-2 my-sm-0" onclick="window.location='/potato'">Potato</button>
+        <button class="btn btn-outline-info my-2 my-sm-0" onclick="window.location='/maize'">Maize</button>
+        <button class="btn btn-outline-info my-2 my-sm-0" onclick="window.location='/cassava'">Cassava</button>
+    </ul>
+      
+</div>
+
+
+{% endblock %}

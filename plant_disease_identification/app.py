@@ -1,4 +1,5 @@
 #!/home/dit/PACKAGES/.ds_env/bin/python3
+#C:\PACKAGES\ds_env\Scripts/python3
 
 #%%
 from __future__ import division, print_function
@@ -20,8 +21,6 @@ from gevent.pywsgi import WSGIServer
 
 # Define a flask app
 app = Flask(__name__)
-
-
 
 
 #%%
@@ -80,43 +79,49 @@ def model_predict(img_path, model, plant):
 
 
 
+PATH = '/media/dit/005EB9025EB8F190/Users/DiT/Downloads/Me/GitHub/Pylingo/Jupyters/DS/Keras/saved_model/'
 @app.route('/', methods=['GET'])
 @app.route('/home', methods=['GET'])
 def home():
-    return render_template('home.html')
+    return render_template('home.html', page='home')
 
     
 @app.route('/tomato', methods=['GET', 'POST'])
 def tomato():
-    session['plant'] = 'tomato'
-    session['path'] = 'plant_models/tomato_inception_v3.h5'
-    return render_template('tomato.html')
+    plant = 'tomato'
+    session['plant'] = plant
+    session['path'] = PATH + 'plant_models/tomato_inception_v3.h5'
+    return render_template('tomato.html', title=plant)
 
 
 @app.route('/pepper', methods=['GET'])
 def pepper():
-    session['plant'] = 'pepper'
-    session['path'] = 'plant_models/pepper_inception_v3.h5'
-    return render_template('pepper.html')
+    plant = 'pepper'
+    session['plant'] = plant
+    session['path'] = PATH + 'plant_models/pepper_inception_v3.h5'
+    return render_template('pepper.html', title=plant)
 
 
 @app.route('/potato', methods=['GET'])
 def potato():
-    session['plant'] = 'potato'
-    session['path'] = 'plant_models/potato_inception_v3.h5'
-    return render_template('potato.html')
+    plant = 'potato'
+    session['plant'] = plant
+    session['path'] = PATH + 'plant_models/potato_inception_v3.h5'
+    return render_template('potato.html', title=plant)
 
 @app.route('/maize', methods=['GET'])
 def maize():
-    session['plant'] = 'maize'
-    session['path'] = 'plant_models/maize_inception_v3.h5'
-    return render_template('maize.html')
+    plant = 'maize'
+    session['plant'] = plant
+    session['path'] = PATH + 'plant_models/maize_inception_v3.h5'
+    return render_template('maize.html', title=plant)
 
 @app.route('/cassava', methods=['GET'])
 def cassava():
-    session['plant'] = 'cassava'
-    session['path'] = 'plant_models/cassava_inception_v3.h5'
-    return render_template('cassava.html')
+    plant = 'cassava'
+    session['plant'] = plant
+    session['path'] = PATH + 'plant_models/cassava_inception_v3.h5'
+    return render_template('cassava.html', title=plant)
 
 
 
